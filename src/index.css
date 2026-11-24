@@ -1,0 +1,298 @@
+@import "tailwindcss";
+
+/* Hide native cursor globally on desktop devices with a mouse/pointer */
+@media (hover: hover) and (pointer: fine) {
+  *,
+  *::before,
+  *::after,
+  html,
+  body,
+  button,
+  a,
+  [role="button"] {
+    cursor: none !important;
+  }
+
+  /* Restore normal native cursor inside text inputs, textareas and editable elements */
+  input,
+  textarea,
+  select,
+  [contenteditable="true"],
+  [contenteditable=""] {
+    cursor: auto !important;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="search"],
+  input[type="password"],
+  input[type="number"],
+  textarea {
+    cursor: text !important;
+  }
+}
+
+@layer base {
+  :root {
+    /* Previous Cinematic Architectural Palette: Black, Charcoal, Slate, Muted Blue/Cyan, White */
+    --color-abyssal-black: #060709;
+    --color-charcoal-dark: #0a0d13;
+    --color-charcoal-medium: #0f131a;
+    --color-slate-stone: #161c26;
+    --color-slate-card: #1c2331;
+    --color-muted-blue: #38bdf8;
+    --color-sky-blue: #60a5fa;
+    --color-cloud-grey: #94a3b8;
+    --color-pure-white: #f8fafc;
+
+    /* Semantic Mappings */
+    --bg-primary: #060709;
+    --bg-secondary: #0a0d13;
+    --bg-card: #0f131a;
+    --bg-card-hover: #161c26;
+    --text-primary: #f8fafc;
+    --text-muted: rgba(248, 250, 252, 0.75);
+    --text-subtle: rgba(248, 250, 252, 0.45);
+    --accent: #38bdf8;
+    --accent-glow: rgba(56, 189, 248, 0.25);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-accent: rgba(56, 189, 248, 0.35);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    position: relative;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Typography styles */
+.font-display {
+  font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-serif-elegant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-sans-clean {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Fluid responsive typography */
+.hero-monolith-title {
+  font-size: clamp(3rem, 11vw, 13.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
+.section-editorial-heading {
+  font-size: clamp(2.2rem, 6.5vw, 6.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.section-subheading {
+  font-size: clamp(1.25rem, 2.8vw, 2.4rem);
+  line-height: 1.2;
+}
+
+/* Film Grain Texture */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Architectural Grid lines in subtle cold white */
+.arch-grid-bg {
+  background-size: 72px 72px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+}
+
+/* Slow, intentional atmospheric drifting */
+@keyframes cloudDriftSlow {
+  0% {
+    transform: translate3d(-6%, 0, 0);
+  }
+  50% {
+    transform: translate3d(4%, -12px, 0);
+  }
+  100% {
+    transform: translate3d(-6%, 0, 0);
+  }
+}
+
+@keyframes cloudDriftMedium {
+  0% {
+    transform: translate3d(4%, 0, 0);
+  }
+  50% {
+    transform: translate3d(-5%, 15px, 0);
+  }
+  100% {
+    transform: translate3d(4%, 0, 0);
+  }
+}
+
+.animate-cloud-slow {
+  animation: cloudDriftSlow 55s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-cloud-medium {
+  animation: cloudDriftMedium 40s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Refined panels with clean rectangular edges */
+.panel-dark {
+  background: rgba(14, 18, 25, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
+}
+
+.panel-card {
+  background: rgba(15, 20, 28, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
+}
+
+/* Buttons with clean rectangular edges */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 0;
+  background-color: #38bdf8;
+  color: #060709;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+  background-color: #7dd3fc;
+  box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 0;
+  background-color: transparent;
+  color: #f8fafc;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  border-color: #38bdf8;
+  background-color: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+  transform: translateY(-2px);
+}
+
+/* Refined, more transparent Start a Project button with clean rectangular edges */
+.btn-start-project {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 0;
+  background-color: rgba(56, 189, 248, 0.14);
+  color: #38bdf8;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  transition: all 0.3s ease;
+}
+
+.btn-start-project:hover {
+  background-color: rgba(56, 189, 248, 0.25);
+  border-color: #38bdf8;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px -4px rgba(56, 189, 248, 0.25);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #060709;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2430;
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-cloud-slow,
+  .animate-cloud-medium {
+    animation: none !important;
+  }
+}
